@@ -6,7 +6,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/ImageEditor.js source_images/feep.ppm [todo] [todo]",
-    "tiny": "node dist/ImageEditor.js source_images/tiny.ppm [todo] [todo]",
+    "tiny": "node dist/ImageEditor.js source_images/tiny.ppm [todo] motionblur",
     "feep": "node dist/ImageEditor.js source_images/feep.ppm [todo] [todo]",
     "sunset": "node dist/ImageEditor.js source_images/sunset.ppm [todo] [todo]",
     "penguins": "node dist/ImageEditor.js source_images/Penguins.ppm [todo] [todo]",

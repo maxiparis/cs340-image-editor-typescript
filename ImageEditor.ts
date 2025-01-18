@@ -17,11 +17,61 @@ const run = async () => {
         const outputFile = args[1]
         const filter = args[2]
 
-        //TODO: build read() function
         const image = await read(inputFile)
-        console.log("done")
+        console.log("done reading")
+
+        if (filter === "grayscale" || filter === "greyscale") {
+            if (args.length != 3) {
+                usage();
+                return
+            }
+            //TODO: working here
+            // grayscale(image)
+            console.log("grayscale")
+        } else if (filter === "invert") {
+            if (args.length != 3) {
+                usage();
+                return
+            }
+            // invert(image)
+            console.log("invert")
+        } else if (filter === "emboss") {
+            if (args.length != 3) {
+                usage();
+                return
+            }
+            // emboss(image)
+            console.log("emboss")
+        } else if (filter === "motionblur") {
+            if (args.length != 4) {
+                usage()
+                return
+            }
 
 
+            //Make sure we have a number as a string
+            let length: number = -1
+            if (Number(args[3])) {
+                length = parseInt(args[3])
+            } else {
+                usage()
+                return
+            }
+
+
+            if (length < 0) {
+                usage()
+                return
+            }
+
+            // motionblur(image, length)
+            console.log("motionblur")
+        } else {
+            usage()
+        }
+
+        // write(image, outputFile)
+        console.log("done writing")
     } catch (error) {
         console.error(error)
     }
