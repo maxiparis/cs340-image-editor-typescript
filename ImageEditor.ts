@@ -77,8 +77,24 @@ const run = async () => {
     }
 }
 
-const usage = () => {
+function usage() {
     console.log(`USAGE: node dist/ImageEditor.js <in-file> <out-file> <grayscale|invert|emboss|motionblur> {motion-blur-length}`)
+}
+
+
+//TODO: test
+function grayscale(image: ImageRead) {
+    for (let x = 0; x < image.getWidth(); x++) {
+        for (let y = 0; y < image.getHeight(); y++) {
+            const curColor = image.get(x, y)
+            let grayLevel = (curColor.red + curColor.green + curColor.blue) / 3
+            grayLevel = Math.max(0, Math.min(grayLevel, 255))
+
+            curColor.red = grayLevel
+            curColor.green = grayLevel
+            curColor.blue = grayLevel
+        }
+    }
 }
 
 const read = async (filePath: string): Promise<ImageRead> => {
