@@ -1,5 +1,6 @@
 import ImageRead from "./ImageRead"
 import { promises as fs } from 'fs'
+import Color from "./Color";
 
 const test = () => {
 }
@@ -17,7 +18,8 @@ const run = async () => {
         const filter = args[2]
 
         //TODO: build read() function
-        const image: ImageRead = await read(inputFile)
+        const image = await read(inputFile)
+        console.log("done")
 
 
     } catch (error) {
@@ -41,16 +43,32 @@ const read = async (filePath: string): Promise<ImageRead> => {
         const width = parseInt(tokens[1])
         const height = parseInt(tokens[2])
 
+        // console.log(`width = ${width}, height = ${height}`)
+
         const colorTokens = tokens.slice(4) //Skipping max color value
 
         image = new ImageRead(width, height)
 
-    } catch (error) {
-        console.error(error)
-    }
+        let index = 0
+        for (let y = 0; y < height; y++) {
+            for (let x = 0; x < width; x++) {
+                let color = new Color()
 
-    // return image
-    return new ImageRead(2, 2)
+                color.red = parseInt(colorTokens[index])
+                index++
+                color.green = parseInt(colorTokens[index])
+                index++
+                color.blue = parseInt(colorTokens[index])
+                index++
+
+                image.set(x,y,color)
+            }
+        }
+        return image
+
+    } catch (error) {
+        throw error
+    }
 }
 
 

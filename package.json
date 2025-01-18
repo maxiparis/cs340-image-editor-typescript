@@ -5,7 +5,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
-    "start": "node dist/ImageEditor.js"
+    "start": "node dist/ImageEditor.js source_images/feep.ppm [todo] [todo]",
+    "tiny": "node dist/ImageEditor.js source_images/tiny.ppm [todo] [todo]",
+    "feep": "node dist/ImageEditor.js source_images/feep.ppm [todo] [todo]",
+    "sunset": "node dist/ImageEditor.js source_images/sunset.ppm [todo] [todo]",
+    "penguins": "node dist/ImageEditor.js source_images/Penguins.ppm [todo] [todo]",
+    "meme": "node dist/ImageEditor.js source_images/one-does-not-simply.ppm [todo] [todo]"
   },
   "keywords": [],
   "author": "",
