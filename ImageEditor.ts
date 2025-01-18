@@ -1,8 +1,8 @@
 import ImageRead from "./ImageRead"
+import Color from "./Color";
 
 const test = () => {
     const test: ImageRead = new ImageRead(2, 5)
-    print2DArray(test.pixels)
 }
 
 const run = () => {
@@ -42,8 +42,8 @@ function print2DArray<T>(array: T[][]): void {
 
 
 
-run()
-// test()
+// run()
+test()
 
 
 
