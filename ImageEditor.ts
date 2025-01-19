@@ -70,7 +70,7 @@ const run = async () => {
             usage()
         }
 
-        // write(image, outputFile)
+        await write(image, outputFile)
         console.log("done writing")
     } catch (error) {
         console.error(error)
@@ -132,6 +132,34 @@ const read = async (filePath: string): Promise<ImageRead> => {
         }
         return image
 
+    } catch (error) {
+        throw error
+    }
+}
+
+const write = async (image: ImageRead, filePath: string) => {
+    try {
+        let data = `P3\n`
+        data += `${image.getWidth()} ${image.getHeight()}\n`
+        data += `255\n`
+
+        for (let y = 0; y < image.getHeight(); y++) {
+            for (let x = 0; x < image.getWidth(); x++) {
+                const color = image.get(x, y)
+                let toAdd = ""
+                if (x != 0) {
+                    toAdd = " "
+                }
+
+                toAdd += `${color.red} ${color.green} ${color.blue}`
+                data += `${toAdd}`
+            }
+            data += "\n"
+        }
+
+        console.log("Data: ")
+        console.log(data)
+        await fs.writeFile(filePath, data)
     } catch (error) {
         throw error
     }
