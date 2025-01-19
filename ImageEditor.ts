@@ -2,9 +2,6 @@ import ImageRead from "./ImageRead"
 import { promises as fs } from 'fs'
 import Color from "./Color";
 
-const test = () => {
-}
-
 const run = async () => {
     const args = process.argv.splice(2)
     try {
@@ -32,7 +29,6 @@ const run = async () => {
                 usage();
                 return
             }
-            //TODO: working here
             invert(image)
             console.log("invert")
         } else if (filter === "emboss") {
@@ -40,7 +36,8 @@ const run = async () => {
                 usage();
                 return
             }
-            // emboss(image)
+            //TODO: working here
+            emboss(image)
             console.log("emboss")
         } else if (filter === "motionblur") {
             if (args.length != 4) {
@@ -79,6 +76,35 @@ const run = async () => {
 
 function usage() {
     console.log(`USAGE: node dist/ImageEditor.js <in-file> <out-file> <grayscale|invert|emboss|motionblur> {motion-blur-length}`)
+}
+
+function emboss(image: ImageRead) {
+    for(let x = image.getWidth() - 1; x >= 0; x--) {
+        for(let y = image.getHeight() - 1; y >= 0; y--) {
+            let curColor: Color = image.get(x, y)
+
+            let diff: number = 0
+            if (x > 0 && y > 0) {
+                let upLeftColor = image.get(x - 1, y - 1);
+                if (Math.abs(curColor.red - upLeftColor.red) > Math.abs(diff)) {
+                    diff = curColor.red - upLeftColor.red;
+                }
+                if (Math.abs(curColor.green - upLeftColor.green) > Math.abs(diff)) {
+                    diff = curColor.green - upLeftColor.green;
+                }
+                if (Math.abs(curColor.blue - upLeftColor.blue) > Math.abs(diff)) {
+                    diff = curColor.blue - upLeftColor.blue;
+                }
+            }
+
+            let grayLevel: number = (128 + diff)
+            grayLevel = Math.max(0, Math.min(grayLevel, 255))
+
+            curColor.red = grayLevel
+            curColor.blue = grayLevel
+            curColor.green = grayLevel
+        }
+    }
 }
 
 function invert(image: ImageRead) {
@@ -176,21 +202,7 @@ const write = async (image: ImageRead, filePath: string) => {
     }
 }
 
-
-
-function print2DArray<T>(array: T[][]): void {
-    for (let i = 0; i < array.length; i++) {
-        for (let j = 0; j < array[i].length; j++) {
-            console.log(array[i][j]);
-        }
-    }
-}
-
-
-
-
 run()
-// test()
 
 
 
