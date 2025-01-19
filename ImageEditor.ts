@@ -25,7 +25,6 @@ const run = async () => {
                 usage();
                 return
             }
-            //TODO: working here
             grayscale(image)
             console.log("grayscale")
         } else if (filter === "invert") {
@@ -33,7 +32,8 @@ const run = async () => {
                 usage();
                 return
             }
-            // invert(image)
+            //TODO: working here
+            invert(image)
             console.log("invert")
         } else if (filter === "emboss") {
             if (args.length != 3) {
@@ -81,8 +81,19 @@ function usage() {
     console.log(`USAGE: node dist/ImageEditor.js <in-file> <out-file> <grayscale|invert|emboss|motionblur> {motion-blur-length}`)
 }
 
+function invert(image: ImageRead) {
+    for (let x = 0; x < image.getWidth(); x++) {
+        for (let y = 0; y < image.getHeight(); y++) {
+            const curColor = image.get(x, y)
 
-//TODO: test
+            curColor.red = 255 - curColor.red
+            curColor.blue = 255 - curColor.blue
+            curColor.green = 255 - curColor.green
+        }
+    }
+}
+
+
 function grayscale(image: ImageRead) {
     for (let x = 0; x < image.getWidth(); x++) {
         for (let y = 0; y < image.getHeight(); y++) {

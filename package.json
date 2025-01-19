@@ -6,11 +6,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/ImageEditor.js source_images/feep.ppm  [todo]",
-    "tiny": "node dist/ImageEditor.js source_images/tiny.ppm result_images/tiny.ppm greyscale",
-    "feep": "node dist/ImageEditor.js source_images/feep.ppm result_images/feep.ppm greyscale",
-    "sunset": "node dist/ImageEditor.js source_images/sunset.ppm result_images/sunset.ppm greyscale",
-    "penguins": "node dist/ImageEditor.js source_images/Penguins.ppm result_images/Penguins.ppm greyscale",
-    "meme": "node dist/ImageEditor.js source_images/one-does-not-simply.ppm result_images/one-does-not-simply.ppm greyscale"
+    "tiny": "node dist/ImageEditor.js source_images/tiny.ppm result_images/tiny.ppm invert",
+    "feep": "node dist/ImageEditor.js source_images/feep.ppm result_images/feep.ppm invert",
+    "sunset": "node dist/ImageEditor.js source_images/sunset.ppm result_images/sunset.ppm invert",
+    "penguins": "node dist/ImageEditor.js source_images/Penguins.ppm result_images/Penguins.ppm invert",
+    "meme": "node dist/ImageEditor.js source_images/one-does-not-simply.ppm result_images/one-does-not-simply.ppm invert"
   },
   "keywords": [],
   "author": "",
