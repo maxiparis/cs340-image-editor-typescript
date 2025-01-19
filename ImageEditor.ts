@@ -26,7 +26,7 @@ const run = async () => {
                 return
             }
             //TODO: working here
-            // grayscale(image)
+            grayscale(image)
             console.log("grayscale")
         } else if (filter === "invert") {
             if (args.length != 3) {
@@ -87,7 +87,7 @@ function grayscale(image: ImageRead) {
     for (let x = 0; x < image.getWidth(); x++) {
         for (let y = 0; y < image.getHeight(); y++) {
             const curColor = image.get(x, y)
-            let grayLevel = (curColor.red + curColor.green + curColor.blue) / 3
+            let grayLevel = Math.floor((curColor.red + curColor.green + curColor.blue) / 3)
             grayLevel = Math.max(0, Math.min(grayLevel, 255))
 
             curColor.red = grayLevel
