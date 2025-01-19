@@ -36,7 +36,6 @@ const run = async () => {
                 usage();
                 return
             }
-            //TODO: working here
             emboss(image)
             console.log("emboss")
         } else if (filter === "motionblur") {
@@ -44,7 +43,6 @@ const run = async () => {
                 usage()
                 return
             }
-
 
             //Make sure we have a number as a string
             let length: number = -1
@@ -55,13 +53,13 @@ const run = async () => {
                 return
             }
 
-
             if (length < 0) {
                 usage()
                 return
             }
 
-            // motionblur(image, length)
+            //TODO: working here
+            motionblur(image, length)
             console.log("motionblur")
         } else {
             usage()
@@ -76,6 +74,33 @@ const run = async () => {
 
 function usage() {
     console.log(`USAGE: node dist/ImageEditor.js <in-file> <out-file> <grayscale|invert|emboss|motionblur> {motion-blur-length}`)
+}
+
+function motionblur(image: ImageRead, length: number) {
+    if (length < 1) {
+        return
+    }
+
+    for (let x = 0; x < image.getWidth(); x++) {
+        for (let y = 0; y < image.getHeight(); y++) {
+            const curColor = image.get(x, y)
+
+            const maxX = Math.min(image.getWidth() - 1, x + length - 1);
+            for (let i = x+1; i<= maxX; i++) {
+                const tmpColor = image.get(i, y);
+                curColor.red += tmpColor.red;
+                curColor.green += tmpColor.green;
+                curColor.blue += tmpColor.blue;
+            }
+
+            const delta = (maxX - x + 1);
+            curColor.red = Math.floor(curColor.red / delta)
+            curColor.green = Math.floor(curColor.green / delta)
+            curColor.blue = Math.floor(curColor.blue / delta)
+        }
+    }
+
+
 }
 
 function emboss(image: ImageRead) {
